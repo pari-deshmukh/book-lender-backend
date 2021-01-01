@@ -1,0 +1,28 @@
+{
+  "name": "public_library_backend",
+  "version": "1.0.0",
+  "description": "Koa based backend API Server for the Public Library Application.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.coventry.ac.uk/304CEM-2021SEPJAN/deshmuk3_public_library_backend"
+  },
+  "keywords": [
+    "public",
+    "library",
+    "backend",
+    "koa",
+    "rest",
+    "api"
+  ],
+  "author": "Pranali Deshmukh",
+  "license": "ISC"
+}
