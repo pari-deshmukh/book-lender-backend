@@ -6,7 +6,6 @@
   "engines": {
     "node": "14.x"
   },
-  "type": "module",
   "directories": {
     "doc": "docs"
   },
@@ -42,14 +41,16 @@
     "jsdoc": "node_modules/.bin/jsdoc -c jsdoc.conf.json",
     "lint": "eslint --ignore-path .gitignore --ignore-path .eslintignore .",
     "packagedeps": "./node_modules/.bin/depcheck .",
-    "pretest": "npm run testDB:drop && npm run testDB:create && npm run testDB:migrate",
+    "pretest": "npm run testDB:drop && npm run testDB:create && npm run testDB:init && npm run testDB:migrate",
     "posttest": "npm run lint",
     "start": "node index.js",
+    "serve:docs": "node docs.js",
     "test": "cross-env DB_DATABASE=test_db jest --testTimeout=10000",
     "test:watch": "cross-env DB_DATABASE=test_db jest --watch",
-    "testDB:drop": "/usr/local/mysql/bin/mysql --user=root --password=password -e 'DROP DATABASE IF EXISTS test_db;'",
-    "testDB:create": "/usr/local/mysql/bin/mysql --user=root --password=password -e 'CREATE DATABASE test_db;'",
-    "testDB:migrate": "/usr/local/mysql/bin/mysqldump --user=root --password=password blog_demo | /usr/local/mysql/bin/mysql --user=root --password=password test_db",
+    "testDB:drop": "mysql --user=librarian --password=librarian -e 'DROP DATABASE IF EXISTS test_db;'",
+    "testDB:create": "mysql --user=librarian --password=librarian -e 'CREATE DATABASE test_db;'",
+    "testDB:init": "cat ./sql_scripts/*.sql | mysql --user=librarian --password=librarian test_db",
+    "testDB:migrate": "mysqldump --user=librarian --password=password blog_demo | mysql --user=librarian --password=librarian test_db",
     "watch": "nodemon start"
   },
   "jest": {
