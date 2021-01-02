@@ -4,4 +4,8 @@ const app = new Koa();
 
 app.use(cors());
 
+const users = require('./routes/users.js');
+
+app.use(users.routes());
+
 module.exports = app;
