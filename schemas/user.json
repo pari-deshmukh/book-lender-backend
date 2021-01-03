@@ -40,6 +40,11 @@
           "description": "Password for registration",
           "type": "string",
           "minLength": 6
+        },
+        "postalAddress": {
+          "description": "Mailing address for book postage",
+          "type": "string",
+          "minLength": 10
         }
       },
       "required": ["username", "email", "password"],
@@ -76,6 +81,11 @@
         "username": {
           "description": "Unique username",
           "type": "string"
+        },
+        "postalAddress": {
+          "description": "Mailing address for book postage",
+          "type": "string",
+          "minLength": 10
         }
       }
     },
@@ -113,6 +123,11 @@
           "description": "Password for registration",
           "type": "string",
           "minLength": 6
+        },
+        "postalAddress": {
+          "description": "Mailing address for book postage",
+          "type": "string",
+          "minLength": 10
         }
       },
       "additionalProperties": false
