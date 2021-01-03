@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "genre": {
+      "$id": "/genre",
+      "title": "genre",
+      "description": "A book genre",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The genre name",
+          "type": "string"
+        },
+        "description": {
+          "description": "More details about the genre",
+          "type": "string"
+        }
+      },
+      "required": ["name"],
+      "additionalProperties": false      
+    }
+  }
+}
