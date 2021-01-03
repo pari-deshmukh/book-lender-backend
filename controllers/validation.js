@@ -7,6 +7,11 @@
 
 const {Validator, ValidationError} = require('jsonschema');
 
+const bookSchema = require('../schemas/book.json').definitions.book;
+const commentSchema = require('../schemas/comment.json').definitions.comment;
+const genreSchema = require('../schemas/genre.json').definitions.genre;
+const requestSchema = require('../schemas/request.json').definitions.request;
+const roleSchema = require('../schemas/role.json').definitions.role;
 const userSchema = require('../schemas/user.json').definitions.user;
 const userUpdateSchema = require('../schemas/user.json').definitions.userUpdate;
 
@@ -50,6 +55,16 @@ const makeKoaValidator = (schema, resource) => {
   return handler;
 }
 
+/** Validate data against book schema */
+exports.validateBook = makeKoaValidator(bookSchema, 'book');
+/** Validate data against comment schema */
+exports.validateComment = makeKoaValidator(commentSchema, 'comment');
+/** Validate data against genre schema */
+exports.validateGenre = makeKoaValidator(genreSchema, 'genre');
+/** Validate data against request schema */
+exports.validateRequest = makeKoaValidator(requestSchema, 'request');
+/** Validate data against role schema */
+exports.validateRole = makeKoaValidator(roleSchema, 'role');
 /** Validate data against user schema for creating new users */
 exports.validateUser = makeKoaValidator(userSchema, 'user');
 /** Validate data against user schema for updating existing users */
