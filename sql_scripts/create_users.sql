@@ -5,6 +5,7 @@ CREATE TABLE users (
       lastName VARCHAR(32),
       username VARCHAR(16) UNIQUE NOT NULL,
       about TEXT,
+      postalAddress TEXT,
       dateRegistered TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
       password VARCHAR(128) NOT NULL,  
       passwordSalt VARCHAR(16),  
