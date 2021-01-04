@@ -15,3 +15,6 @@ CREATE TABLE users (
       PRIMARY KEY (ID),
       FOREIGN KEY (role) REFERENCES roles (name)
 );
+
+INSERT INTO users (role, firstName, lastName, username, postalAddress, password, email) VALUES ('user', 'John', 'Doe', 'johndoe', 'some random address', '$2b$10$L/QFcmfoita0fNzT/n0HveFWcafJ0UyK4TIz1QsjMsjP6o/6RgJUS', 'john@doe.com');
+INSERT INTO users (role, firstName, lastName, username, postalAddress, password, email) VALUES ('admin', 'Jane', 'Doe', 'janedoe', 'some random address', '$2b$10$TagUE/qze9AzmVsYbBVmPeG8KyCjGcMSVT3YWMgNQBebzhKOKMNOG', 'jane@doe.com');
