@@ -50,14 +50,14 @@ async function getAll(ctx) {
   if (result.length) {
     const body = result.map(book => {
       // extract the book fields we want to send back (summary details)
-      const {ID, title, summary, imageURL, authorID} = book;
+      const {ID, title, author, isbn, availabilityStatus, summary, frontCoverImageURL, rearCoverImageURL, ownerID} = book;
       // add links to the book summaries for HATEOAS compliance
       // clients can follow these to find related resources
       const links = {
         requests: `${ctx.protocol}://${ctx.host}${prefix}/${book.ID}/requests`,
         self: `${ctx.protocol}://${ctx.host}${prefix}/${book.ID}`
       }
-      return {ID, title, summary, imageURL, authorID, links};
+      return {ID, title, author, isbn, availabilityStatus, summary, frontCoverImageURL, rearCoverImageURL, ownerID, links};
     });
     ctx.body = body;
   }
