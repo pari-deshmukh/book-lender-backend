@@ -1,5 +1,13 @@
 const db = require('../helpers/database');
 
+//search for books based on query pattern
+exports.bookSearch = async function bookSearch (q) {
+  const query = "SELECT * FROM books WHERE (title LIKE ? OR author LIKE ? OR isbn LIKE ? OR availabilityStatus LIKE ?);";
+  const values = ['%'+q+'%', '%'+q+'%','%'+q+'%','%'+q+'%'];
+  const data = await db.run_query(query, values);
+  return data;
+}
+
 //get a single book by its id  
 exports.getById = async function getById (id) {
   const query = "SELECT * FROM books WHERE ID = ?;";

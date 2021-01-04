@@ -19,6 +19,7 @@ router.post('/', auth, bodyParser(), validateBook, createBook);
 router.get('/:id([0-9]{1,})', getById);
 router.put('/:id([0-9]{1,})', auth, bodyParser(), validateBook, updateBook);
 router.del('/:id([0-9]{1,})', auth, deleteBook);
+router.get('/search', bookSearch);
 
 // genres routes
 router.get('/:id([0-9]{1,})/genres', getAllGenres);
@@ -29,6 +30,23 @@ router.del('/:id([0-9]{1,})/genres/:cid([0-9]{1,})', auth, removeGenre);
 router.get('/:id([0-9]{1,})/requests', getAllBookRequests);
 router.post('/:id([0-9]{1,})/requests', auth, bodyParser(), createRequestIds, validateRequest, createRequest);
 
+async function bookSearch(ctx, next) {
+  // TODO: this implementation is basic
+  // you could add pagination, partial response, etc.
+
+    let q = ctx.request.query.term;
+    
+    if (q && q.length < 3) {
+      ctx.status = 400;
+      ctx.body = {message: "Search string length must be 3 or more."}
+      return next();
+    }
+
+    let result = await books.bookSearch(q);
+    if (result.length) {
+      ctx.body = result;
+    }    
+}
 
 async function getAll(ctx) {
   let {page=1, limit=10, order='dateCreated', direction='DESC'} = ctx.request.query;
