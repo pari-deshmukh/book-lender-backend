@@ -14,6 +14,13 @@ exports.getById = async function getById (id) {
   return data;
 }
 
+//get all requests by a book id  
+exports.getById = async function getByBookId (id) {
+  const query = "SELECT * FROM requests WHERE bookID = ?;";
+  const data = await db.run_query(query, [id]);
+  return data;
+}
+
 //create a new request in the database
 exports.add = async function add (request) {
   const query = "INSERT INTO requests SET ?;";
