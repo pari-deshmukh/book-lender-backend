@@ -15,6 +15,8 @@ servers:
 tags:
   - name: Users
     description: API endpoints for user management.
+  - name: Books
+    description: API endpoints for book management
 paths:
   /users:
     summary: Represents an individual user
@@ -54,6 +56,37 @@ paths:
                 $ref: ./user.json#/definitions/userList
         '401':
           description: Only admin users can list all accounts
+    login:
+      tags:
+        - Users
+      description:
+        Login into your account.
+      responses:
+        '200':
+          description: User logged in successfully.
+          content:
+            application/json:
+              schema:
+                $ref: ./user.json#/definitions/userlogin
+        '404':
+          description: Incorrect UserId or Password
+    search:
+      tags:
+        - Users
+      description:
+        Seach user by id.
+      responses:
+        '200':
+          description: View the search result.
+          content:
+            application/json:
+              schema:
+                $ref: ./user.json#/definitions/userSearched
+        '401':
+          description: Non-admin users can only view their own record
+        '404':
+          description: Not found
+          
   /users/{id}:
     parameters:
       - in: path
@@ -113,5 +146,116 @@ paths:
                 $ref: ./user.json#/definitions/userDeleted
         '401':
           description: Only admin users can delete accounts
+        '404':
+          description: Not found
+  /book:
+    summary: Represents the books
+    description: >
+      This resource represents the books in the system.
+      Each book is identified by a numeric `id`.
+    post:
+      tags:
+        - Books
+      description:
+        Add the new book.
+      requestBody:
+        description: All new books Data.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ./book.json#/definitions/book
+      responses:
+        '201':
+          description: 
+          content:
+            application/json:
+              schema:
+                $ref: ./book.json#/definitions/bookUpdated
+    get:
+      tags:
+        - Books
+      description:
+        Get a list of all the books.
+      responses:
+        '200':
+          description: List of Books
+          content:
+            application/json:
+              schema:
+                $ref: ./book.json#/definitions/booksList
+    search:
+      tags:
+        - Books
+      description:
+        Seach Book by id.
+      responses:
+        '200':
+          description: View the search result.
+          content:
+            application/json:
+              schema:
+                $ref: ./book.json#/definitions/bookSearched
+        '404':
+          description: Not found
+  /book/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+        description: Numeric id of the book
+    get:
+      tags:
+        - Books
+      description:
+        Get book by id.
+      responses:
+        '200':
+          description: View of book record
+          content:
+            application/json:
+              schema:
+                $ref: ./book.json#/definitions/bookView
+        '404':
+          description: Not found
+    put:
+      tags:
+        - Books
+      description:
+        Update book by id.
+      requestBody:
+        description: Update a visible details of the book.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ./book.json#/definitions/bookUpdate
+      responses:
+        '200':
+          description: Confirmation and link to record.
+          content:
+            application/json:
+              schema:
+                $ref: ./book.json#/definitions/bookUpdated
+        '401':
+          description: Only admin users can update the book details
+        '404':
+          description: Not found
+    delete:
+      tags:
+        - Books
+      description:
+        Delete book by id.
+      responses:
+        '200':
+          description: Confirmation of deletion.
+          content:
+            application/json:
+              schema:
+                $ref: ./book.json#/definitions/bookDeleted
+        '401':
+          description: Only admin users can delete books
         '404':
           description: Not found
